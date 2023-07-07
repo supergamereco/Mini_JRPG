@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class PlayersData
+public class EnemiesData
 {
-    public PlayerData[] playerData;
+    public EnemyData[] enemyData;
 }
 
 [System.Serializable]
-public class PlayerData
+public class EnemyData
 {
     public int id;
-    public int class_id;
-    public PlayerSkills playerSkills;
     public int maxhp;
     public int maxmp;
     public int speed;
@@ -45,11 +43,5 @@ public class PlayerData
     public int darkPower;
     public int arcanePower;
     public int breakPoint;
-    public int money;
 }
 
-[System.Serializable]
-public class PlayerSkills
-{
-    public int[] skill_id;
-}

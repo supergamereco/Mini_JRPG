@@ -15,19 +15,9 @@ public class Utils : MonoBehaviour
         for (int i = parent.childCount - 1; i >= amount; --i)
             GameObject.Destroy(parent.GetChild(i).gameObject);
     }
-}
-
-public class JSONPlayerDataReader : MonoBehaviour
-{
-    public TextAsset jsonPlayerFile;
-
-    void Start()
+    public static void BalanceBattlerPrefabs(GameObject prefab, Transform parent)
     {
-        PlayersData playerDataInJson = JsonUtility.FromJson<PlayersData>(jsonPlayerFile.text);
-
-        foreach (PlayerData playerData in playerDataInJson.playerData)
-        {
-            Debug.Log("ID: " + playerData.id + "Level" + playerData.level + "MaxHp" + playerData.maxhp);
-        }
+        GameObject go = GameObject.Instantiate(prefab);
+        go.transform.SetParent(parent, false);
     }
 }

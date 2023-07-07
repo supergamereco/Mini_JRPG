@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class PlayerBattler : MonoBehaviour
 {
     public int m_id;
+    public int m_classid;
+    public PlayerSkills m_playerSkills;
     public int m_hp;
     public int m_mp;
     public int m_speed;
@@ -57,6 +59,8 @@ public class PlayerBattler : MonoBehaviour
     public void setupPlayer(PlayerData data)
     {
         m_id = data.id;
+        m_classid = data.class_id;
+        m_playerSkills = data.playerSkills;
         m_hp = data.maxhp;
         m_mp = data.maxmp;
         m_speed = data.speed;
