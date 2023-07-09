@@ -15,6 +15,10 @@ public class Battle : MonoBehaviour
     }
 
     public List<PlayerData> playerList = new List<PlayerData>();
+    public List<Skill> player1SkillList = new List<Skill>();
+    public List<Skill> player2SkillList = new List<Skill>();
+    public List<Skill> player3SkillList = new List<Skill>();
+    public List<Skill> player4SkillList = new List<Skill>();
     public List<EnemyData> enemyList = new List<EnemyData>();
     public TextMeshProUGUI[] playerHPtext;
     public TextMeshProUGUI[] enemyHPtext;
@@ -27,13 +31,16 @@ public class Battle : MonoBehaviour
     public GameObject invisibleFrame;
     public GameObject characterSkillPanel;
     public GameObject classSkillPanel;
-    public Button[] skillButton;
+    public GameObject[] skillButton;
     public string battleState;
     public int currentSkill_id;
+    public string currentTurn;
+    public string side;
 
     public void setBattleScene()
     {
         LoadJsonPlayerData();
+        LoadJsonEnemyData();
         //--------------------------Instantiate Player Battler-----------------------------
 
         for (int i = 0; i < playerList.Count; i++)
@@ -59,6 +66,39 @@ public class Battle : MonoBehaviour
         }
     }
 
+    private void setupSkillUI(int playerTurn)
+    {
+        //--------------------------Setup Skill UI-----------------------------
+        if(playerTurn == 1)
+        {
+            for (int i = 0; i < player1SkillList.Count; i++)
+            {
+                skillButton[i].GetComponent<SkillButton>().setSkillButton(player1SkillList[i]);
+            }
+        }
+       else if (playerTurn == 2)
+        {
+            for (int i = 0; i < player1SkillList.Count; i++)
+            {
+                skillButton[i].GetComponent<SkillButton>().setSkillButton(player1SkillList[i]);
+            }
+        }
+        else if(playerTurn == 3)
+        {
+            for (int i = 0; i < player1SkillList.Count; i++)
+            {
+                skillButton[i].GetComponent<SkillButton>().setSkillButton(player1SkillList[i]);
+            }
+        }
+        else if(playerTurn == 4)
+        {
+            for (int i = 0; i < player1SkillList.Count; i++)
+            {
+                skillButton[i].GetComponent<SkillButton>().setSkillButton(player1SkillList[i]);
+            }
+        }
+    }
+
     public TextAsset jsonPlayerFile;
 
     void LoadJsonPlayerData()
@@ -69,6 +109,41 @@ public class Battle : MonoBehaviour
         {
             Debug.Log("ID " + playerData.id + "HP " + playerData.maxhp);
             playerList.Add(playerData);
+        }
+        for (int i = 0; i < playerList.Count; i++)
+        {
+            LoadJsonSkillData(i+1, playerList[i]);
+        }
+    }
+
+    void LoadJsonSkillData(int playerIndex, PlayerData player)
+    {
+        SkillData skillDataInJson = JsonUtility.FromJson<SkillData>(jsonPlayerFile.text);
+
+        foreach (Skill skillData in skillDataInJson.skillData)
+        {
+            Debug.Log("ID " + skillData.id + "Name " + skillData.name);
+            for(int i = 0; i < player.skill_id.Length; i++)
+            {
+                if (skillData.id == player.skill_id[i])
+                {
+                    switch (playerIndex)
+                    {
+                        case 1:
+                            player1SkillList.Add(skillData);
+                            break;
+                        case 2:
+                            player2SkillList.Add(skillData);
+                            break;
+                        case 3:
+                            player3SkillList.Add(skillData);
+                            break;
+                        case 4:
+                            player4SkillList.Add(skillData);
+                            break;
+                    }
+                }
+            }
         }
     }
 

@@ -56,4 +56,24 @@ public class DataBase : MonoBehaviour
         }
     }
     public readonly static EnemySprite enemySprite = new EnemySprite();
+
+    public class SkillSprite
+    {
+        public Dictionary<int, Sprite> _sprites = new Dictionary<int, Sprite>();
+
+        public Sprite Get(int i)
+        {
+            int index = i - 1;
+            if (!_sprites.ContainsKey(index))
+            {
+                string path = $"Image/Sprite/Skills/skill ({index})";
+                Sprite sprite = Resources.Load<Sprite>(path);
+                if (sprite == null)
+                    Debug.LogError($"No sprite from: {path}");
+                _sprites[index] = sprite;
+            }
+            return _sprites[index];
+        }
+    }
+    public readonly static SkillSprite skillSprite = new SkillSprite();
 }

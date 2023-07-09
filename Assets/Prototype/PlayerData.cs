@@ -12,18 +12,23 @@ public class PlayersData
 public class PlayerData
 {
     public int id;
+    public string name;
+    public int mainClass_id;
     public int class_id;
-    public PlayerSkills playerSkills;
+    public int level;
     public int maxhp;
     public int maxmp;
     public int speed;
-    public int level;
     public int phyPower;
     public int magPower;
     public int critChance;
+    public int critPower;
+    public int evasion;
+    public int hitRate;
     public int defense;
     public int phyRes;
     public int magRes;
+    public int statusRes;
     public int fireRes;
     public int iceRes;
     public int windRes;
@@ -45,11 +50,7 @@ public class PlayerData
     public int darkPower;
     public int arcanePower;
     public int breakPoint;
-    public int money;
-}
-
-[System.Serializable]
-public class PlayerSkills
-{
     public int[] skill_id;
+    public int passive_id;
+    public int totalStats;
 }

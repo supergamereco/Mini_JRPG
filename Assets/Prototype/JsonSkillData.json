@@ -1,0 +1,20 @@
+{
+  "skillData": [
+    {
+      "id": "1",
+      "category": "attack",
+      "type": "magical",
+      "name": "Water Fall",
+      "description": "skil description",
+      "element": "water",
+      "level": "1",
+      "targetType": "ally",
+      "targetAmount": "2",
+      "damageFrom": "phyPower",
+      "statusGiven": "Bleed",
+      "statusTaken": "Swiftness",
+      "statusGivenChance": "20",
+      "statusTakenChance": "50"
+    }
+  ]
+}
