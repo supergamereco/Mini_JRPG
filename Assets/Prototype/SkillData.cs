@@ -20,6 +20,7 @@ public class Skill
     public int level;
     public string targetType;
     public int targetAmount;
+    public float damageMultiply;
     public string damageFrom;
     public string statusGiven;
     public string statusTaken;

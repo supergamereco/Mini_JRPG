@@ -116,9 +116,11 @@ public class Battle : MonoBehaviour
         }
     }
 
+    public TextAsset jsonSkillFile;
+
     void LoadJsonSkillData(int playerIndex, PlayerData player)
     {
-        SkillData skillDataInJson = JsonUtility.FromJson<SkillData>(jsonPlayerFile.text);
+        SkillData skillDataInJson = JsonUtility.FromJson<SkillData>(jsonSkillFile.text);
 
         foreach (Skill skillData in skillDataInJson.skillData)
         {

@@ -5,10 +5,13 @@ using UnityEngine;
 [System.Serializable]
 public class Attacking
 {
-    public int damage;
+    public float damage;
     public string damageType;
     public string element;
-    public int accuracy;
-    public bool isCrit;
+    public float accuracy;
+    public float critChance;
+    public float critPower;
+    public List<string> status;
+    public List<float> chance;
 }
 
