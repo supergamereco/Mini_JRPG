@@ -2,47 +2,52 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class Battler : MonoBehaviour
 {
+    public string battlerSide;
+    public int unitid;
+
     #region baseStats
     public int m_id;
     public string m_name;
     public int m_level;
-    public int m_maxhp;
-    public int m_maxmp;
-    public int m_speed;
-    public int m_phyPower;
-    public int m_magPower;
-    public int m_critChance;
-    public int m_critPower;
-    public int m_evasion;
-    public int m_hitRate;
-    public int m_deffense;
-    public int m_phyRes;
-    public int m_magRes;
-    public int m_statusRes;
-    public int m_fireRes;
-    public int m_iceRes;
-    public int m_windRes;
-    public int m_earthRes;
-    public int m_waterRes;
-    public int m_grassRes;
-    public int m_electricRes;
-    public int m_lightRes;
-    public int m_darkRes;
-    public int m_arcaneRes;
-    public int m_firePower;
-    public int m_icePower;
-    public int m_windPower;
-    public int m_earthPower;
-    public int m_waterPower;
-    public int m_grassPower;
-    public int m_electricPower;
-    public int m_lightPower;
-    public int m_darkPower;
-    public int m_arcanePower;
+    public float m_maxhp;
+    public float m_maxmp;
+    public float m_speed;
+    public float m_phyPower;
+    public float m_magPower;
+    public float m_critChance;
+    public float m_critPower;
+    public float m_evasion;
+    public float m_hitRate;
+    public float m_deffense;
+    public float m_phyRes;
+    public float m_magRes;
+    public float m_statusRes;
+    public float m_fireRes;
+    public float m_iceRes;
+    public float m_windRes;
+    public float m_earthRes;
+    public float m_waterRes;
+    public float m_grassRes;
+    public float m_electricRes;
+    public float m_lightRes;
+    public float m_darkRes;
+    public float m_arcaneRes;
+    public float m_firePower;
+    public float m_icePower;
+    public float m_windPower;
+    public float m_earthPower;
+    public float m_waterPower;
+    public float m_grassPower;
+    public float m_electricPower;
+    public float m_lightPower;
+    public float m_darkPower;
+    public float m_arcanePower;
     public int m_breakPoint;
     public List<int> battlerSkillid;
     public int battlerPassiveid;
@@ -59,7 +64,7 @@ public class Battler : MonoBehaviour
     public float current_critPower;
     public float current_evasion;
     public float current_hitRate;
-    public int current_deffense;
+    public float current_deffense;
     public float current_phyRes;
     public float current_magRes;
     public float current_statusRes;
@@ -136,6 +141,7 @@ public class Battler : MonoBehaviour
     public bool isAccuracy = false;
     #endregion
 
+    public List<Skill> battlerSkillList = new List<Skill>();
     public SpriteRenderer battlerSprite;
     public Animator battlerAnimator;
 
@@ -295,8 +301,7 @@ public class Battler : MonoBehaviour
         {
             if (number <= counterChance)
             {
-                // Continue ------ Move SkillList from Battle to Battler!!!
-                //Attack(this.battlerSkillid[0], this, attacker);
+                Attack(battlerSkillList[0], this, attacker);
             }
         }
     }
@@ -460,6 +465,28 @@ public class Battler : MonoBehaviour
                 isAccuracy = true;
                 break;
         }
+    }
+
+    public void LoadJsonSkillData()
+    {
+        SkillData skillDataInJson = JsonUtility.FromJson<SkillData>(BattleManager.Instance.jsonSkillFile.text);
+
+        foreach (Skill skillData in skillDataInJson.skillData)
+        {
+            Debug.Log("ID " + skillData.id + "Name " + skillData.name);
+            for (int i = 0; i < battlerSkillid.Count; i++)
+            {
+                if (skillData.id == battlerSkillid[i])
+                {
+                    battlerSkillList.Add(skillData);
+                }
+            }
+        }
+    }
+
+    public void DestroyBattler()
+    {
+        Destroy(this.gameObject);
     }
 }
 

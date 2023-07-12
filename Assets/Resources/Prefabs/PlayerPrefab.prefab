@@ -101,17 +101,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a15a13306eef74e659abb513925f2de1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  battlerSide: 
+  unitid: 0
   m_id: 0
-  m_hp: 120
-  m_mp: 0
-  m_speed: 0
+  m_name: 
   m_level: 0
+  m_maxhp: 0
+  m_maxmp: 0
+  m_speed: 0
   m_phyPower: 0
   m_magPower: 0
   m_critChance: 0
+  m_critPower: 0
+  m_evasion: 0
+  m_hitRate: 0
   m_deffense: 0
   m_phyRes: 0
   m_magRes: 0
+  m_statusRes: 0
   m_fireRes: 0
   m_iceRes: 0
   m_windRes: 0
@@ -133,9 +140,98 @@ MonoBehaviour:
   m_darkPower: 0
   m_arcanePower: 0
   m_breakPoint: 0
-  m_money: 0
-  playerSprite: {fileID: 2894440814088236773}
-  playerAnimator: {fileID: 0}
+  battlerSkillid: 
+  battlerPassiveid: 0
+  current_level: 0
+  current_hp: 0
+  current_mp: 0
+  current_speed: 0
+  current_phyPower: 0
+  current_magPower: 0
+  current_critChance: 0
+  current_critPower: 0
+  current_evasion: 0
+  current_hitRate: 0
+  current_deffense: 0
+  current_phyRes: 0
+  current_magRes: 0
+  current_statusRes: 0
+  current_fireRes: 0
+  current_iceRes: 0
+  current_windRes: 0
+  current_earthRes: 0
+  current_waterRes: 0
+  current_grassRes: 0
+  current_electricRes: 0
+  current_lightRes: 0
+  current_darkRes: 0
+  current_arcaneRes: 0
+  current_firePower: 0
+  current_icePower: 0
+  current_windPower: 0
+  current_earthPower: 0
+  current_waterPower: 0
+  current_grassPower: 0
+  current_electricPower: 0
+  current_lightPower: 0
+  current_darkPower: 0
+  current_arcanePower: 0
+  current_breakPoint: 0
+  current_barrier: 0
+  current_counterChance: 0
+  current_totalStats: 0
+  isDead: 0
+  isGuard: 0
+  isAttacked: 0
+  isEvaded: 0
+  isStun: 0
+  isFreeze: 0
+  isParalyze: 0
+  isSleep: 0
+  isRoot: 0
+  isTerrify: 0
+  isTaunt: 0
+  isBurn: 0
+  isForstbite: 0
+  isPoison: 0
+  isCorrupt: 0
+  isBleed: 0
+  isDeAtk: 0
+  isDeMAtk: 0
+  isDeDef: 0
+  isDeMagRes: 0
+  isDePhyRes: 0
+  isVulnerable: 0
+  isSlow: 0
+  isUnhealable: 0
+  isDoom: 0
+  isWeakness: 0
+  isTargeted: 0
+  isBlind: 0
+  isInAtk: 0
+  isInMAtk: 0
+  isInDef: 0
+  isInMagRes: 0
+  isInPhyRes: 0
+  isBarrier: 0
+  isSwiftness: 0
+  isProtection: 0
+  isRegen: 0
+  isAegis: 0
+  isImmunity: 0
+  isFury: 0
+  isMight: 0
+  isStability: 0
+  isQuickness: 0
+  isAccuracy: 0
+  battlerSkillList: []
+  battlerSprite: {fileID: 2894440814088236773}
+  battlerAnimator: {fileID: 0}
+  m_classid: 0
+  classSkillid: 
+  current_classid: 0
+  classPassiveid: 0
+  classSkillList: []
 --- !u!222 &2894440814088236774
 CanvasRenderer:
   m_ObjectHideFlags: 0

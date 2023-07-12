@@ -22,8 +22,9 @@ public class Skill
     public int targetAmount;
     public float damageMultiply;
     public string damageFrom;
+    public bool criticalAble;
     public string statusGiven;
     public string statusTaken;
-    public int statusGivenChance;
-    public int statusTakenChance;
+    public float statusGivenChance;
+    public float statusTakenChance;
 }

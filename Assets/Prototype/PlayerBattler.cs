@@ -16,8 +16,12 @@ public class PlayerBattler : Battler
     public int classPassiveid;
     #endregion
 
+    public List<Skill> classSkillList = new List<Skill>();
+
     public void setupPlayer(PlayerData data)
     {
+        battlerSide = "player";
+
         #region setupBaseStats
         m_id = data.id;
         m_name = data.name;
@@ -36,6 +40,7 @@ public class PlayerBattler : Battler
         m_deffense = data.defense;
         m_phyRes = data.phyRes;
         m_magRes = data.magRes;
+        m_statusRes = data.statusRes;
         m_fireRes = data.fireRes;
         m_iceRes = data.iceRes;
         m_windRes = data.windRes;
@@ -94,6 +99,27 @@ public class PlayerBattler : Battler
         current_breakPoint = data.breakPoint;
         #endregion
 
+        LoadJsonSkillData();
+        LoadJsonClassSkillData();
+
         battlerSprite.sprite = DataBase.playerSprite.Get(m_id);
     }
+
+    public void LoadJsonClassSkillData()
+    {
+        SkillData skillDataInJson = JsonUtility.FromJson<SkillData>(BattleManager.Instance.jsonSkillFile.text);
+
+        foreach (Skill skillData in skillDataInJson.skillData)
+        {
+            Debug.Log("ID " + skillData.id + "Name " + skillData.name);
+            for (int i = 0; i < classSkillid.Count; i++)
+            {
+                if (skillData.id == classSkillid[i])
+                {
+                    classSkillList.Add(skillData);
+                }
+            }
+        }
+    }
+
 }

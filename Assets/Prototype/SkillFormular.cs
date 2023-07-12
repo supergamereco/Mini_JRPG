@@ -36,7 +36,7 @@ public class SkillFormular : MonoBehaviour
                     break;
             }
 
-            _damageDealt.damage = damageStats * skill.damageMultiply;
+            _damageDealt.damage = damageStats * (skill.damageMultiply/100);
             _damageDealt.damageType = skill.type;
             _damageDealt.element = skill.element;
             float elementAmp = 0;

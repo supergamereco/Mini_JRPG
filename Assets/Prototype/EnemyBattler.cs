@@ -1,166 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class EnemyBattler : Battler
 {
-    #region baseStats
-    public int m_id;
-    public string m_name;
-    public int m_level;
-    public int m_maxhp;
-    public int m_maxmp;
-    public int m_speed;
-    public int m_phyPower;
-    public int m_magPower;
-    public int m_critChance;
-    public int m_critPower;
-    public int m_evasion;
-    public int m_hitRate;
-    public int m_deffense;
-    public int m_phyRes;
-    public int m_magRes;
-    public int m_statusRes;
-    public int m_fireRes;
-    public int m_iceRes;
-    public int m_windRes;
-    public int m_earthRes;
-    public int m_waterRes;
-    public int m_grassRes;
-    public int m_electricRes;
-    public int m_lightRes;
-    public int m_darkRes;
-    public int m_arcaneRes;
-    public int m_firePower;
-    public int m_icePower;
-    public int m_windPower;
-    public int m_earthPower;
-    public int m_waterPower;
-    public int m_grassPower;
-    public int m_electricPower;
-    public int m_lightPower;
-    public int m_darkPower;
-    public int m_arcanePower;
-    public int m_breakPoint;
-    public List<int> monsterSkillid;
-    public int monsterPassiveid;
-    #endregion
+    [SerializeField]
+    private UnityEvent _clicked;
+    private BattleSceneMouseInput _mouse;
 
-    #region currentStats
-    public int current_classid;
-    public int current_level;
-    public int current_hp;
-    public int current_mp;
-    public int current_speed;
-    public int current_phyPower;
-    public int current_magPower;
-    public int current_critChance;
-    public int current_critPower;
-    public int current_evasion;
-    public int current_hitRate;
-    public int current_deffense;
-    public int current_phyRes;
-    public int current_magRes;
-    public int current_statusRes;
-    public int current_fireRes;
-    public int current_iceRes;
-    public int current_windRes;
-    public int current_earthRes;
-    public int current_waterRes;
-    public int current_grassRes;
-    public int current_electricRes;
-    public int current_lightRes;
-    public int current_darkRes;
-    public int current_arcaneRes;
-    public int current_firePower;
-    public int current_icePower;
-    public int current_windPower;
-    public int current_earthPower;
-    public int current_waterPower;
-    public int current_grassPower;
-    public int current_electricPower;
-    public int current_lightPower;
-    public int current_darkPower;
-    public int current_arcanePower;
-    public int current_breakPoint;
-    public int classPassiveid;
-    public int current_barrier;
-    public float current_counterChance;
-    public int current_totalStats;
-    public int isDead = 0;
-    public bool isGuard = false;
-    public bool isAttacked = false;
-    public bool isEvaded = false;
-    #endregion
-
-    #region status
-    public bool isStun = false;
-    public bool isFreeze = false;
-    public bool isParalyze = false;
-    public bool isSleep = false;
-    public bool isRoot = false;
-    public bool isTerrify = false;
-    public bool isTaunt = false;
-    public bool isBurn = false;
-    public bool isForstbite = false;
-    public bool isPoison = false;
-    public bool isCorrupt = false;
-    public bool isBleed = false;
-    public bool isDeAtk = false;
-    public bool isDeMAtk = false;
-    public bool isDeDef = false;
-    public bool isDeMagRes = false;
-    public bool isDePhyRes = false;
-    public bool isVulnerable = false;
-    public bool isSlow = false;
-    public bool isUnhealable = false;
-    public bool isDoom = false;
-    public bool isWeakness = false;
-    public bool isTargeted = false;
-    public bool isBlind = false;
-    public bool isInAtk = false;
-    public bool isInMAtk = false;
-    public bool isInDef = false;
-    public bool isInMagRes = false;
-    public bool isInPhyRes = false;
-    public bool isBarrier = false;
-    public bool isSwiftness = false;
-    public bool isProtection = false;
-    public bool isRegen = false;
-    public bool isAegis = false;
-    public bool isImmunity = false;
-    public bool isFury = false;
-    public bool isMight = false;
-    public bool isStability = false;
-    public bool isQuickness = false;
-    public bool isAccuracy = false;
-    #endregion
-
-    public SpriteRenderer enemySprite;
-    public Animator enemyAnimator;
-    // Start is called before the first frame update
-    void Start()
+    public void Awake()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        _mouse = FindObjectOfType<BattleSceneMouseInput>();
+        _mouse.ClickedOnEnemy += MouseOnClicked;
     }
 
     public void setupEnemy(EnemyData data)
     {
+        battlerSide = "enemy";
+
         #region setupBaseStats
         m_id = data.id;
+        m_name = data.name;
+        m_level = data.level;
         m_maxhp = data.maxhp;
         m_maxmp = data.maxmp;
         m_speed = data.speed;
-        m_level = data.level;
+        m_phyPower = data.phyPower;
+        m_magPower = data.magPower;
+        m_critChance = data.critChance;
+        m_critPower = data.critPower;
+        m_evasion = data.evasion;
+        m_hitRate = data.hitRate;
         m_deffense = data.defense;
         m_phyRes = data.phyRes;
         m_magRes = data.magRes;
+        m_statusRes = data.statusRes;
         m_fireRes = data.fireRes;
         m_iceRes = data.iceRes;
         m_windRes = data.windRes;
@@ -182,6 +58,11 @@ public class EnemyBattler : Battler
         m_darkPower = data.darkPower;
         m_arcanePower = data.arcanePower;
         m_breakPoint = data.breakPoint;
+        for (int i = 0; i < data.skill_id.Length; i++)
+        {
+            battlerSkillid.Add(data.skill_id[i]);
+        }
+        battlerPassiveid = data.passive_id;
         #endregion
 
         #region setupCurrentStats
@@ -214,6 +95,20 @@ public class EnemyBattler : Battler
         current_breakPoint = data.breakPoint;
         #endregion
 
-        enemySprite.sprite = DataBase.enemySprite.Get(m_id);
+        LoadJsonSkillData();
+
+        battlerSprite.sprite = DataBase.enemySprite.Get(m_id);
+    }
+
+    public void MouseOnClicked()
+    {
+        Debug.Log("Clicked");
+        Destroy(gameObject);
+        _clicked?.Invoke();
+    }
+
+    public void onTargeted()
+    {
+        BattleManager.Instance.PlayerSelectTarget(this);
     }
 }
