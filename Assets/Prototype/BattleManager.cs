@@ -37,6 +37,7 @@ public class BattleManager : MonoBehaviour
     public GameObject[] classSkillButton;
     public Image currentTurnBattlerImage;
     public string battleState;
+    public List<Skill> playerSkillList;
     public Skill currentSkill;
     private int currentTurnUnitid;
     private int currentTurnBattlerid;
@@ -199,7 +200,7 @@ public class BattleManager : MonoBehaviour
     private void setupCharacterSkillUI()
     {
         //--------------------------Setup Skill UI-----------------------------
-        int index = 0;
+        int playerIndex = 0;
         for (int i = 0; i < battlerList.Count; i++)
         {
             for (int j = 0; j < playerList.Count; j++)
@@ -207,13 +208,15 @@ public class BattleManager : MonoBehaviour
                 if (battlerList[i].m_id == playerList[j].m_id && battlerList[i].battlerSide == playerList[j].battlerSide
                     && playerList[j].m_id == currentTurnBattlerid)
                 {
-                    index = j;
+                    playerIndex = j;
                 }
             }
         }
-        for (int i = 0; i < playerList[index].battlerSkillList.Count; i++)
+        int skillIndex = 0;
+        for (int i = 0; i < playerList[playerIndex].battlerSkillList.Count; i++)
         {
-            characterSkillButton[i].GetComponent<SkillButton>().setSkillButton(playerList[index].battlerSkillList[i]);
+            characterSkillButton[i].GetComponent<SkillButton>().setSkillButton(playerList[playerIndex].battlerSkillList[i], i);
+            skillIndex++;
         }
     }
 
@@ -232,9 +235,11 @@ public class BattleManager : MonoBehaviour
                 }
             }
         }
+        int skillIndex = 0;
         for (int i = 0; i < playerList[index].classSkillList.Count; i++)
         {
-            classSkillButton[i].GetComponent<SkillButton>().setSkillButton(playerList[index].classSkillList[i]);
+            classSkillButton[i].GetComponent<SkillButton>().setSkillButton(playerList[index].classSkillList[i], skillIndex);
+            skillIndex++;
         }
     }
 
@@ -270,6 +275,11 @@ public class BattleManager : MonoBehaviour
     void Update()
     {
          
+    }
+
+    public void onSkillSelected(int index)
+    {
+        currentSkill = playerSkillList[index];
     }
 
     public void onCharacterSkillClick()

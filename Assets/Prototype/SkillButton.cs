@@ -4,9 +4,9 @@ using UnityEngine;
 using System;
 using UnityEngine.UI;
 
-[System.Serializable]
 public class SkillButton : MonoBehaviour
 {
+    public int m_skill_index;
     public int m_skill_id;
     public string m_skill_category;
     public string m_skill_type;
@@ -37,37 +37,36 @@ public class SkillButton : MonoBehaviour
         
     }
 
-    public void setSkillButton(Skill skill)
+    public void setSkillButton(Skill skill, int index)
     {
+        m_skill_index = index;
         m_skill = skill;
-        m_skill_id = skill.id;
-        m_skill_category = skill.category;
-        m_skill_type = skill.type;
-        m_skill_name = skill.name;
-        m_skill_description = skill.description;
-        m_skill_element = skill.element;
-        m_skill_level = skill.level;
-        m_skill_targetType = skill.targetType;
-        m_skill_targetAmount = skill.targetAmount;
-        m_skill_damageMultiply = skill.damageMultiply;
-        m_skill_damageFrom = skill.damageFrom;
-        m_skill_criticalAble = skill.criticalAble;
-        m_skill_statusGiven = skill.statusGiven;
-        m_skill_statusTaken = skill.statusTaken;
-        m_skill_statusGivenChance = skill.statusGivenChance;
-        m_skill_statusTakenChance = skill.statusTakenChance;
+        m_skill_id = m_skill.id;
+        m_skill_category = m_skill.category;
+        m_skill_type = m_skill.type;
+        m_skill_name = m_skill.name;
+        m_skill_description = m_skill.description;
+        m_skill_element = m_skill.element;
+        m_skill_level = m_skill.level;
+        m_skill_targetType = m_skill.targetType;
+        m_skill_targetAmount = m_skill.targetAmount;
+        m_skill_damageMultiply = m_skill.damageMultiply;
+        m_skill_damageFrom = m_skill.damageFrom;
+        m_skill_criticalAble = m_skill.criticalAble;
+        m_skill_statusGiven = m_skill.statusGiven;
+        m_skill_statusTaken = m_skill.statusTaken;
+        m_skill_statusGivenChance = m_skill.statusGivenChance;
+        m_skill_statusTakenChance = m_skill.statusTakenChance;
         skillSprite.sprite = DataBase.skillSprite.Get(m_skill_id);
-        Debug.Log("!!!!!!!!!!!!!" + m_skill.name);
+        BattleManager.Instance.playerSkillList.Add(skill);
     }
 
     public void OnClick()
     {
         BattleManager.Instance.battleState = "playerSelectTarget";
-        BattleManager.Instance.currentSkill = m_skill;
-        Debug.Log(m_skill.name + " " + m_skill.damageFrom);
-        Debug.Log("ID " + BattleManager.Instance.currentSkill.id);
-        Debug.Log("name " + BattleManager.Instance.currentSkill.name);
-        Debug.Log("category " + BattleManager.Instance.currentSkill.category);
+
+        Debug.Log(m_skill_index);
+        BattleManager.Instance.onSkillSelected(m_skill_index);
         BattleManager.Instance.characterSkillPanel.SetActive(false);
         BattleManager.Instance.classSkillPanel.SetActive(false);
     }

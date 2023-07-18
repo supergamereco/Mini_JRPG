@@ -27,4 +27,8 @@ public class Skill
     public string statusTaken;
     public float statusGivenChance;
     public float statusTakenChance;
+    public Skill getSkill()
+    {
+        return this;
+    }
 }
