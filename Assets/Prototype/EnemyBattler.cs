@@ -6,14 +6,9 @@ using UnityEngine.EventSystems;
 
 public class EnemyBattler : Battler
 {
-    [SerializeField]
-    private UnityEvent _clicked;
-    private BattleSceneMouseInput _mouse;
-
     public void Awake()
     {
-        _mouse = FindObjectOfType<BattleSceneMouseInput>();
-        _mouse.ClickedOnEnemy += MouseOnClicked;
+
     }
 
     public void setupEnemy(EnemyData data)
@@ -100,11 +95,10 @@ public class EnemyBattler : Battler
         battlerSprite.sprite = DataBase.enemySprite.Get(m_id);
     }
 
-    public void MouseOnClicked()
+    public void OnMouseDown()
     {
         Debug.Log("Clicked");
-        Destroy(gameObject);
-        _clicked?.Invoke();
+        BattleManager.Instance.Action(this);
     }
 
     public void onTargeted()

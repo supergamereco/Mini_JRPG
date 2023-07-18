@@ -20,7 +20,8 @@ public class BattleManager : MonoBehaviour
     public List<EnemyData> enemyDataList = new List<EnemyData>();
     public List<EnemyBattler> enemyList = new List<EnemyBattler>();
     public List<Battler> battlerList = new List<Battler>();
-    public List<Battler> battlerListPlayed = new List<Battler>();
+    public List<Battler> battlerListTemp = new List<Battler>();
+    public List<Battler> battlerListOnSpeed = new List<Battler>();
     public TextMeshProUGUI[] playerHPtext;
     public TextMeshProUGUI[] enemyHPtext;
     public GameObject PlayerZone;
@@ -39,7 +40,7 @@ public class BattleManager : MonoBehaviour
     public Skill currentSkill;
     private int currentTurnUnitid;
     private int currentTurnBattlerid;
-    private int _unitid;
+    private int _unitid = 0;
     public string side;
 
     public void setupBattleScene()
@@ -76,17 +77,20 @@ public class BattleManager : MonoBehaviour
         }
         #endregion
 
+        UpdateUI();
         TurnSequence();
     }
 
     public void resetBattleScene()
     {
+        _unitid = 0;
         playerDataList.Clear();
         enemyDataList.Clear();
         playerList.Clear();
         enemyList.Clear();
         battlerList.Clear();
-        battlerListPlayed.Clear();
+        battlerListTemp.Clear();
+        battlerListOnSpeed.Clear();
         for (int i = 0; i < PlayerZone.transform.childCount; i++)
         {
             if (PlayerZone.transform.GetChild(i).transform.childCount != 0)
@@ -105,27 +109,64 @@ public class BattleManager : MonoBehaviour
 
     public void TurnSequence()
     {
+        int unit_id = 0;
+        Debug.Log("step1");
         for (int i = 0; i < playerList.Count; i++)
         {
             battlerList.Add(playerList[i]);
+            battlerListTemp.Add(playerList[i]);
         }
+        Debug.Log("step2");
         for (int i = 0; i < enemyList.Count; i++)
         {
             battlerList.Add(enemyList[i]);
+            battlerListTemp.Add(enemyList[i]);
         }
-        float mostSpeed = 0;
+        Debug.Log("step3");
         for (int i = 0; i < battlerList.Count; i++)
         {
-            float speedTemp = battlerList[i].current_speed;
-            if (speedTemp > mostSpeed)
+            float mostSpeed = 0;
+            for (int j = 0; j < battlerListTemp.Count; j++)
             {
-                mostSpeed = speedTemp;
-                side = battlerList[i].battlerSide;
-                currentTurnUnitid = battlerList[i].unitid;
-                currentTurnBattlerid = battlerList[i].m_id;
+                float speedTemp = battlerListTemp[j].current_speed;
+                if(mostSpeed == speedTemp)
+                {
+                    float number = Random.Range(0, 2);
+                    if (number >= 1)
+                    {
+                        speedTemp = speedTemp + number;
+                    }
+                    else
+                    {
+                        speedTemp = speedTemp - number;
+                    }
+                }
+                if (speedTemp > mostSpeed)
+                {
+                    mostSpeed = speedTemp;
+                    unit_id = battlerListTemp[j].unitid;
+                }
             }
+            for (int j = 0; j < battlerListTemp.Count; j++)
+            {
+                if(battlerListTemp[j].unitid == unit_id)
+                {
+                    battlerListOnSpeed.Add(battlerListTemp[j]);
+                    battlerListTemp.Remove(battlerListTemp[j]);
+                }
+            }
+
+            Debug.Log(battlerListOnSpeed[i].name);
         }
-        if(side == "player")
+        FindBattlerTurn();
+    }
+    public void FindBattlerTurn()
+    {
+        side = battlerListOnSpeed[0].battlerSide;
+        currentTurnUnitid = battlerListOnSpeed[0].unitid;
+        currentTurnBattlerid = battlerListOnSpeed[0].m_id;
+
+        if (side == "player")
         {
             invisibleFrame.SetActive(false);
             currentTurnBattlerImage.sprite = DataBase.playerSprite.Get(currentTurnBattlerid);
@@ -137,14 +178,22 @@ public class BattleManager : MonoBehaviour
             currentTurnBattlerImage.sprite = DataBase.enemySprite.Get(currentTurnBattlerid);
             //----Enemy Action Method
         }
-        //------- Removed played unit
-        //for (int i = 0; i < battlerList.Count; i++)
-        //{
-        //    if (battlerList[i].unitid == currentTurnUnitid)
-        //    {
-        //        battlerList.Remove(battlerList[i]);
-        //    }
-        //}
+    }
+    public void Action(Battler defender)
+    {
+        Debug.Log("TurnSequence2");
+        battlerListOnSpeed[0].Attack(currentSkill, battlerListOnSpeed[0], defender);
+        UpdateUI();
+        if(battlerListOnSpeed.Count.Equals(0))
+        {
+            TurnSequence();
+        }
+        else
+        {
+            FindBattlerTurn();
+        }
+
+        battlerListOnSpeed.Remove(battlerListOnSpeed[0]);
     }
 
     private void setupCharacterSkillUI()

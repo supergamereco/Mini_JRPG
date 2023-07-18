@@ -2335,9 +2335,6 @@ MonoBehaviour:
   battlerSkillList: []
   battlerSprite: {fileID: 0}
   battlerAnimator: {fileID: 0}
-  _clicked:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!212 &295475116
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5987,9 +5984,6 @@ MonoBehaviour:
   battlerSkillList: []
   battlerSprite: {fileID: 0}
   battlerAnimator: {fileID: 0}
-  _clicked:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!212 &688904257
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9002,9 +8996,6 @@ MonoBehaviour:
   battlerSkillList: []
   battlerSprite: {fileID: 0}
   battlerAnimator: {fileID: 0}
-  _clicked:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!212 &1107043799
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -15995,8 +15986,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1966229317}
   - component: {fileID: 1966229318}
-  - component: {fileID: 1966229320}
-  - component: {fileID: 1966229319}
   m_Layer: 0
   m_Name: BattleManager
   m_TagString: Untagged
@@ -16090,48 +16079,6 @@ MonoBehaviour:
   jsonPlayerFile: {fileID: 4900000, guid: 1182f13dc066b4ef28784499c7528cd4, type: 3}
   jsonSkillFile: {fileID: 4900000, guid: 394c8e3970b8df941b0ed497582e9bfb, type: 3}
   jsonEnemyFile: {fileID: 4900000, guid: 29fb0d06d5ab54be58453d03b2f3a5cb, type: 3}
---- !u!114 &1966229319
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1966229316}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49c3c53ec4c04644db1477491a021368, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1966229320
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1966229316}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 9f7fe062c35f63049a8d000e89e2681e, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: BattleScene
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 1601348937}
 --- !u!1 &1968770550
 GameObject:
   m_ObjectHideFlags: 0
@@ -16755,9 +16702,6 @@ MonoBehaviour:
   battlerSkillList: []
   battlerSprite: {fileID: 0}
   battlerAnimator: {fileID: 0}
-  _clicked:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!212 &2062240295
 SpriteRenderer:
   m_ObjectHideFlags: 0

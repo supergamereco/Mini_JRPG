@@ -3,7 +3,7 @@
       {
         "id": "1",
         "name": "Clock Magus",
-        "maxhp": "120",
+        "maxhp": "3600",
         "maxmp": "100",
         "speed": "12",
         "level": "1",
@@ -45,7 +45,7 @@
       {
         "id": "2",
         "name": "Fire Wolf",
-        "maxhp": "160",
+        "maxhp": "260",
         "maxmp": "50",
         "speed": "9",
         "level": "1",
@@ -86,7 +86,7 @@
       {
         "id": "3",
         "name": "Frost Wolf",
-        "maxhp": "220",
+        "maxhp": "240",
         "maxmp": "24",
         "speed": "11",
         "level": "1",

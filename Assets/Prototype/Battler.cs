@@ -276,7 +276,7 @@ public class Battler : MonoBehaviour
         Counter(current_counterChance, attacker);
     }
 
-    private float criticalDamageRecieved;
+    public float criticalDamageRecieved;
     private float CriticalCalculation(float damage, float critPower)
     {
         criticalDamageRecieved = damage + (damage * critPower);

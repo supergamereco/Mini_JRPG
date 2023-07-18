@@ -6,7 +6,7 @@ public class SkillFormular : MonoBehaviour
 {
     public class DealingSingleTargetDamage
     {
-        public Attacking _damageDealt = new Attacking();
+        public Attacking _damageDealt;
 
         public Attacking Get(Skill skill, Battler battler)
         {
