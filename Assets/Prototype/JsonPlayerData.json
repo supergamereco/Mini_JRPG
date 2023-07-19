@@ -53,7 +53,7 @@
       "maxmp": "100",
       "speed": "18",
       "phyPower": "14",
-      "magPower": "8",
+      "magPower": "189",
       "critChance": "7",
       "critPower": "7",
       "evasion": "7",
@@ -83,7 +83,7 @@
       "darkPower": "1",
       "arcanePower": "0",
       "breakPoint": "3",
-      "skill_id": [ "1", "2", "3", "4" ],
+      "skill_id": [ "1", "6", "7", "8" ],
       "passive_id": "3"
     },
     {
@@ -96,7 +96,7 @@
       "maxmp": "100",
       "speed": "10",
       "phyPower": "14",
-      "magPower": "8",
+      "magPower": "17",
       "critChance": "7",
       "critPower": "7",
       "evasion": "7",
@@ -126,7 +126,7 @@
       "darkPower": "1",
       "arcanePower": "0",
       "breakPoint": "3",
-      "skill_id": [ "1", "2", "3", "4" ],
+      "skill_id": [ "1", "5", "3", "7" ],
       "passive_id": "3"
     },
     {
@@ -139,7 +139,7 @@
       "maxmp": "100",
       "speed": "11",
       "phyPower": "14",
-      "magPower": "8",
+      "magPower": "12",
       "critChance": "7",
       "critPower": "7",
       "evasion": "7",
@@ -169,7 +169,7 @@
       "darkPower": "1",
       "arcanePower": "0",
       "breakPoint": "3",
-      "skill_id": [ "1", "2", "3", "4" ],
+      "skill_id": [ "1", "2", "4", "6" ],
       "passive_id": "3"
     }
   ]

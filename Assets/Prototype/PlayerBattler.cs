@@ -73,6 +73,12 @@ public class PlayerBattler : Battler
         current_hp = data.maxhp;
         current_mp = data.maxmp;
         current_speed = data.speed;
+        current_phyPower = data.phyPower;
+        current_magPower = data.magPower;
+        current_critChance = data.critChance;
+        current_critPower = data.critPower;
+        current_evasion = data.evasion;
+        current_hitRate = data.hitRate;
         current_deffense = data.defense;
         current_phyRes = data.phyRes;
         current_magRes = data.magRes;

@@ -150,10 +150,12 @@ public class Battler : MonoBehaviour
         Evade(attack.accuracy);
         if (!isEvaded)
         {
+            Debug.Log("Attacked Method " + attack.damage);
             TakeDamage(attack, attacker);
         }
         else if (!isProtection)
         {
+            Debug.Log("Attacked Method " + attack.damage);
             TakeDamage(attack, attacker);
         }
         else
@@ -272,8 +274,13 @@ public class Battler : MonoBehaviour
             }
 
         }
+        else
+        {
+            damageRecieved = rawDamage;
+        }
         current_hp = current_hp - damageRecieved;
         Counter(current_counterChance, attacker);
+        Debug.Log("current_hp " + current_hp + "damageRecieved " + damageRecieved);
     }
 
     public float criticalDamageRecieved;

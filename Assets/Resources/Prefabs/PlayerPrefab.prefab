@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2894440814088236774}
   m_Layer: 0
   m_Name: PlayerPrefab
-  m_TagString: Untagged
+  m_TagString: PlayerBattler
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -227,6 +227,7 @@ MonoBehaviour:
   battlerSkillList: []
   battlerSprite: {fileID: 2894440814088236773}
   battlerAnimator: {fileID: 0}
+  criticalDamageRecieved: 0
   m_classid: 0
   classSkillid: 
   current_classid: 0

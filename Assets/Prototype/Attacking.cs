@@ -11,7 +11,7 @@ public class Attacking
     public float accuracy;
     public float critChance;
     public float critPower;
-    public List<string> status;
-    public List<float> chance;
+    public List<string> status = new List<string>();
+    public List<float> chance = new List<float>();
 }
 

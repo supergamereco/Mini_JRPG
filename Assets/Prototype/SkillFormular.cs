@@ -6,11 +6,12 @@ public class SkillFormular : MonoBehaviour
 {
     public class DealingSingleTargetDamage
     {
-        public Attacking _damageDealt;
+        public Attacking _damageDealt = new Attacking();
 
         public Attacking Get(Skill skill, Battler battler)
         {
             float damageStats = 0;
+            Debug.Log("damageFrom " + skill.damageFrom);
             switch (skill.damageFrom)
             {
                 case "phyPower":
@@ -86,6 +87,7 @@ public class SkillFormular : MonoBehaviour
             _damageDealt.accuracy = battler.current_hitRate;
             _damageDealt.critChance = battler.current_critChance;
             _damageDealt.critPower = battler.current_critPower;
+            Debug.Log("skill.statusGiven " + skill.statusGiven);
             for (int i = 0; i < skill.statusGiven.Length; i++)
             {
                 _damageDealt.status.Add(skill.statusGiven);

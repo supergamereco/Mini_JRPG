@@ -23,6 +23,7 @@ public class SkillButton : MonoBehaviour
     public string m_skill_statusTaken;
     public float m_skill_statusGivenChance;
     public float m_skill_statusTakenChance;
+    public Button skillButton;
     public Image skillSprite;
     public Skill m_skill;
     // Start is called before the first frame update
@@ -61,12 +62,15 @@ public class SkillButton : MonoBehaviour
         BattleManager.Instance.playerSkillList.Add(skill);
     }
 
-    public void OnClick()
+    public void addListenner(int skill_index)
+    {
+        this.GetComponent<Button>().onClick.AddListener(() => OnClick(m_skill_index));
+    }
+
+    public void OnClick(int skill_index)
     {
         BattleManager.Instance.battleState = "playerSelectTarget";
-
-        Debug.Log(m_skill_index);
-        BattleManager.Instance.onSkillSelected(m_skill_index);
+        BattleManager.Instance.onSkillSelected(skill_index);
         BattleManager.Instance.characterSkillPanel.SetActive(false);
         BattleManager.Instance.classSkillPanel.SetActive(false);
     }

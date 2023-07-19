@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class BattleManager : MonoBehaviour
@@ -43,6 +44,7 @@ public class BattleManager : MonoBehaviour
     private int currentTurnBattlerid;
     private int _unitid = 0;
     public string side;
+    private int targetID;
 
     public void setupBattleScene()
     {
@@ -163,6 +165,7 @@ public class BattleManager : MonoBehaviour
     }
     public void FindBattlerTurn()
     {
+        Debug.Log("Find Battler Turn");
         side = battlerListOnSpeed[0].battlerSide;
         currentTurnUnitid = battlerListOnSpeed[0].unitid;
         currentTurnBattlerid = battlerListOnSpeed[0].m_id;
@@ -182,10 +185,11 @@ public class BattleManager : MonoBehaviour
     }
     public void Action(Battler defender)
     {
-        Debug.Log("TurnSequence2");
         battlerListOnSpeed[0].Attack(currentSkill, battlerListOnSpeed[0], defender);
         UpdateUI();
-        if(battlerListOnSpeed.Count.Equals(0))
+
+        battlerListOnSpeed.Remove(battlerListOnSpeed[0]);
+        if (battlerListOnSpeed.Count.Equals(0))
         {
             TurnSequence();
         }
@@ -193,8 +197,6 @@ public class BattleManager : MonoBehaviour
         {
             FindBattlerTurn();
         }
-
-        battlerListOnSpeed.Remove(battlerListOnSpeed[0]);
     }
 
     private void setupCharacterSkillUI()
@@ -216,6 +218,7 @@ public class BattleManager : MonoBehaviour
         for (int i = 0; i < playerList[playerIndex].battlerSkillList.Count; i++)
         {
             characterSkillButton[i].GetComponent<SkillButton>().setSkillButton(playerList[playerIndex].battlerSkillList[i], i);
+            characterSkillButton[i].GetComponent<SkillButton>().addListenner(skillIndex);
             skillIndex++;
         }
     }
@@ -271,10 +274,22 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ClickOnTarget()
     {
-         
+        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+
+        if (hit.collider != null)
+        {
+            if (battleState == "playerSelectTarget")
+            {
+                if (hit.transform.tag == "EnemyBattler")
+                {
+                    targetID = hit.transform.GetComponent<EnemyBattler>().m_id;
+                    Action(hit.transform.GetComponent<EnemyBattler>());
+                    Debug.Log("Raycast Hit!! magPower" + hit.transform.GetComponent<EnemyBattler>().current_magPower);
+                }
+            }
+        }
     }
 
     public void onSkillSelected(int index)
